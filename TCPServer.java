@@ -31,29 +31,28 @@ public class TCPServer {
 	}
 
 	/**
-	 * Inicia o servidor e fica escutando no endereço e porta especificada no
-	 * construtor
+	 * Initie le server en écoute sur le port X
 	 */
 	public void serve() {
 		ServerSocket serverSocket = null;
 
-		logger.info("Iniciando servidor no endereço: " + this.host
+		logger.info("Initialisation du server sur le port: " + this.host
 				+ ":" + this.port);		
 		
 		try {
-			// Cria a conexão servidora
+			// Création de la connexion
 			serverSocket = new ServerSocket(port, 1,
 					InetAddress.getByName(host));
 		} catch (IOException e) {
-			logger.log(Level.SEVERE, "Erro ao iniciar servidor!", e);
+			logger.log(Level.SEVERE, "Erreur d'initialisation!", e);
 			return;
 		}
-		logger.info("Conexão com o servidor aberta no endereço: " + this.host
+		logger.info("Conexion avec le server ouverte au port: " + this.host
 				+ ":" + this.port);
 
-		// Fica esperando pela conexão cliente
+		// en attente du client
 		while (true) {
-			logger.info("Aguardando conexões...");
+			logger.info("En attente de connexion...");
 			Socket socket = null;
 			InputStream input = null;
 			OutputStream output = null;
@@ -66,23 +65,23 @@ public class TCPServer {
 				input = socket.getInputStream();
 				output = socket.getOutputStream();
 
-				// Realiza o parse da requisição recebida
+				// Parse de la requête
 				String requestString = convertStreamToString(input);
-				logger.info("Conexão recebida. Conteúdo:\n" + requestString);
+				logger.info("Connexion reçue : contenue:\n" + requestString);
 				Request request = new Request();
 				request.parse(requestString);
 
-				// recupera a resposta de acordo com a requisicao
+				// récupere la réponse
 				Response response = ResponseFactory.createResponse(request);
 				String responseString = response.respond();
-				logger.info("Resposta enviada. Conteúdo:\n" + responseString);
+				logger.info("Réponse envoyé, contenue :\n" + responseString);
 				output.write(responseString.getBytes());
 
-				// Fecha a conexão
+				// ferme la connexion
 				socket.close();
 
 			} catch (Exception e) {
-				logger.log(Level.SEVERE, "Erro ao executar servidor!", e);
+				logger.log(Level.SEVERE, "Erreur d'execution du server!", e);
 				continue;
 			}
 		}
@@ -99,7 +98,7 @@ public class TCPServer {
 				int i = reader.read(buffer);
 				writer.write(buffer, 0, i);
 			} catch (IOException e) {
-				logger.log(Level.SEVERE, "Erro ao converter stream para string", e);
+				logger.log(Level.SEVERE, "Problème de conversion", e);
 				return "";
 			}
 			return writer.toString();
