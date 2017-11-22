@@ -2,13 +2,10 @@ package proxy;
 
 public class ResponseFactory {
 	/**
-	 * Retorna a resposta adequada ao request
-	 * @param request request
-	 * @return resposta de acordo com o request
-	 */
+	 * Retourner la réponse adéquate
+	 **/
 	public static Response createResponse(Request request) {
-		// TODO: Colocar outros tipos de response. Ex: FileResponse, DBResponse,
-		// CacheResponse
+
 
 		return new DummyResponse(request);
 	}
