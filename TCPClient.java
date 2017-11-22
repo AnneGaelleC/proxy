@@ -61,9 +61,9 @@ public class TCPClient {
 		try {
 			System.out.println(client.getURIRawContent("/blog/"));
 		} catch (UnknownHostException e) {
-			logger.log(Level.SEVERE, "Host desconhecido!", e);
+			logger.log(Level.SEVERE, "Hôte inconnu!", e);
 		} catch (IOException e) {
-			logger.log(Level.SEVERE, "Erro de entrada e saída!", e);
+			logger.log(Level.SEVERE, "Erreur entré/sortie!", e);
 		}
 
 	}
