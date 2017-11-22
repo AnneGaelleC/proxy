@@ -5,11 +5,7 @@ import java.io.IOException;
 import java.io.StringReader;
 
 /**
- * Realiza o parse da requisição recebida
- * 
- * @author Thiago Galbiatti Vespa - <a
- *         href="mailto:thiago@thiagovespa.com.br">thiago@thiagovespa.com.br</a>
- * @version 0.2
+ * Realise le parsage de la requête
  */
 public class Request {
 
@@ -20,13 +16,7 @@ public class Request {
 	public Request() {
 	}
 
-	/**
-	 * Realiza o parse
-	 * 
-	 * @param input
-	 * @return
-	 * @throws IOException
-	 */
+
 	public void parse(String input) throws IOException {
 		BufferedReader br = new BufferedReader(new StringReader(input));
 		String line = null;
@@ -39,37 +29,30 @@ public class Request {
 					this.method = values[0];
 					this.uri = values[1];
 					this.protocol = values[2];
-				}// TODO Tratar erro
+				} // cas d'erreur
 			} else {
-				// TODO Recuperar os cabeçalhos e corpo
+				
 			}
 			lineNumber++;
 
 		}
 	}
 
-	/**
-	 * Recupera o método
-	 * 
-	 * @return metodo TODO: Converter para Enum
-	 */
+
 	public String getMethod() {
 		return method;
 	}
 
 	/**
-	 * Recupera a URI
-	 * 
-	 * @return uri
+	 * Recuperer l'URI
+
 	 */
 	public String getUri() {
 		return uri;
 	}
 
 	/**
-	 * Recupera o protocolo
-	 * 
-	 * @return TODO: Fazer validação
+	 * Recuperer le protocol
 	 */
 	public String getProtocol() {
 		return protocol;
